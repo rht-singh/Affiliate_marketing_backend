@@ -90,7 +90,7 @@ app.post('/api/v1/register',async(req,res)=>{
           }
         })
 
-        await generate(Phone);
+        await generate(email);
 
         find.Name = Name;
         find.time = time;
@@ -123,7 +123,7 @@ app.post('/api/v1/register',async(req,res)=>{
         Pasword:hashedPassword,
         verified});
 
-         await generate(Phone);
+         await generate(email);
         await res.json({
           status:"success",
 
