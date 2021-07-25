@@ -3,12 +3,7 @@ const { sequelize, user } = require('./../models')
 const nodemailer = require('nodemailer')
 
 
-let getOTP = async()=>{
-    let otp = Math.random();
-    otp = otp * 1000000>>0;
-  
-    return otp;
-  }
+
 
   
 const sendOTP = async(email,otp)=>{
@@ -61,7 +56,7 @@ return "sucess";
 
 
   const generate = async (email) => {
-    const otp =  await getOTP();
+    const otp = await Math.random()*1000000>>0;
   
     console.log(otp)
     const send_otp_status = await sendOTP(email,otp);
