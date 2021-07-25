@@ -31,7 +31,7 @@ const sendOTP = async(email,otp)=>{
     to: `${email}`, // list of receivers
     subject: "Otp from Affilate_Marketer", // Subject line
     text: "<b>Hello world?</b>" , // plain text body
-    html: `Here is you Otp ${otp}.Please dont't share it with anyone.This otp is valid for 10min.You're receiving this email because you recently created new email because you recently created a new account.If this wasn't you, please ignore this email. Otherwise visit on link <a href="https://leadsguru.in/?ref=Amar1234jeet">https://leadsguru.in/?ref=Amar1234jeet<a>  `, // html body
+    html: `Here is you Otp <h1>${otp}</h1>.<br>Please dont't share it with anyone.<br>This otp is valid for 10min.<br>You're receiving this email because you recently created new email because you recently created a new account.<br>If this wasn't you, please ignore this email. Otherwise visit on link <a href="https://leadsguru.in/?ref=Amar1234jeet">https://leadsguru.in/?ref=Amar1234jeet<a>  `, // html body
   });
 
   console.log("Message sent: %s", info.messageId);
