@@ -3,7 +3,7 @@
     "username": "affilate",
     "password": "affilate",
     "database": "affilate_trading",
-    "host": "18.118.210.250"
+    "host": "18.118.210.250",
     "dialect": "postgres"
   },
   "test": {
