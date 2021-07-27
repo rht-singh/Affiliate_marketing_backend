@@ -4,6 +4,7 @@ const app =express();
 const { checkIfUserExist,checkIfUserVerified  }= require('./utils/validation');
 const { generate } = require('./utils/otp');
 const http = require('http');
+const cors = require('cors');
 const { checkIotp }= require('./utils/checkotp')
 HttpsProxyAgent = require("https-proxy-agent");
 const proxy = process.env.http_proxy || "localhost:3000"; 
@@ -12,6 +13,10 @@ const bcrypt = require('bcrypt');
 
 
 http.createServer(app);
+
+app.use(cors({
+  origin:"*"
+}))
 
 app.use(express.json())
 
