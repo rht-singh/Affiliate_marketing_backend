@@ -301,7 +301,12 @@ app.post('/api/v1/verify',async(req,res)=>{
 })
 
 app.get('/api/v1/delete',async(req,res)=>{
-  let deleted = await user.destroy();
+  let {email} = req.query;
+  let deleted = await user.destroy({
+    where:{
+      email
+    }
+  });
   if(deleted){
     await res.json({
       status:"success",
