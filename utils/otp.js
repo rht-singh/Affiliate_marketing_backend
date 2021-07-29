@@ -7,20 +7,27 @@ const nodemailer = require('nodemailer')
 
   
 const sendOTP = async(email,otp)=>{
-
+try{
   var transporter = nodemailer.createTransport({
     service: 'gmail',
+    port:465,
+    secure:false,
     auth: {
       user: 'wbdeveloper80@gmail.com',
       pass: 'not7Th!s'
     }
+    ,tls:{
+      rejectUnauthorized:false,
+      
+    }
+    
   });
   
   var mailOptions = {
     from: 'wbdeveloper80@gmail.com',
     to: email,
-    subject: 'Sending Email using Node.js',
-    text: 'That was easy!'
+    subject: "Otp from Affilator's",
+    text: `Here is you ${otp} .Please Don't share it with anyone`
   };
   
   transporter.sendMail(mailOptions, function(error, info){
@@ -30,7 +37,18 @@ const sendOTP = async(email,otp)=>{
       console.log('Email sent: ' + info.response);
     }
   });
-
+  let data = await user.findOne({
+    where:{
+      email
+    }
+  })
+  data.otp=otp;
+  await data.save();
+  console.log('success');
+}
+catch(err){
+  console.log(err);
+}
 
  
 };
