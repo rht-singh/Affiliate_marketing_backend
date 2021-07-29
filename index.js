@@ -10,7 +10,8 @@ HttpsProxyAgent = require("https-proxy-agent");
 const proxy = process.env.http_proxy || "localhost:3000"; 
 const agent = new HttpsProxyAgent(proxy);
 const bcrypt = require('bcrypt');
-
+const nodemailer = require('nodemailer');
+const { getMaxListeners } = require('process');
 
 http.createServer(app);
 
@@ -306,9 +307,43 @@ app.post("/api/v1/resend", async (req, res) => {
       console.log(error);
       res.json({
         status: "failure",
+        err:error
       });
     }
   });
+
+app.get('/emailtesting',(req,res)=>{
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'wbdeveloper80@gmail.com',
+      pass: 'not7Th!s'
+    }
+  });
+  
+  var mailOptions = {
+    from: 'wbdeveloper80@gmail.com',
+    to: 'rhtsingh172@gmail.com',
+    subject: 'Sending Email using Node.js',
+    text: 'That was easy!'
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+      res.json(error)
+
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.json(info)
+      
+
+
+    }
+  });
+
+
+})
 
 
   app.post('/api/v1/forget_password',async(req,res)=>{
