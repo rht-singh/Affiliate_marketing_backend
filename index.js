@@ -300,8 +300,8 @@ app.post('/api/v1/verify',async(req,res)=>{
     }
 })
 
-app.get('/api/v1/delete',async(req,res)=>{
-  let {email} = req.query;
+app.post('/api/v1/delete',async(req,res)=>{
+  let {email} = req.body;
   let deleted = await user.destroy({
     where:{
       email
