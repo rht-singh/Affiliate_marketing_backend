@@ -14,9 +14,7 @@ const bcrypt = require('bcrypt');
 
 http.createServer(app);
 
-app.use(cors({
-  origin:"*"
-}))
+app.use(cors())
 
 app.use(express.json())
 
@@ -24,7 +22,7 @@ app.get('/api/v1/users',async(req,res)=>{
   try{
     
     let data = await user.findAll({
-      attributes:['Name','Phone','email']
+      attributes:{exclude:['createdAt','updatedAt','device','user_id']}
     });
     if(data){
       await res.json({
@@ -54,11 +52,18 @@ app.get('/api/v1/user',async(req,res)=>{
         Phone
       }
     })
+    if(userData){
     await res.json({
       status:"success",
       userData
     })
-
+  }
+else{
+  await res.json({
+    status:"fail",
+    User:"Not Found"
+  })
+}
   }
   catch(err){
     console.log(err)
@@ -69,7 +74,7 @@ app.get('/api/v1/user',async(req,res)=>{
   }
 })
 
-app.post('/api/v1/register',async(req,res)=>{
+app.post('/api/v1/register',cors(),async(req,res)=>{
   try{
 
     let {
@@ -207,7 +212,7 @@ app.post('/api/v1/add_why_join',async(req,res)=>{
     }
 })
 
-app.post('/api/v1/login_affilate',async(req,res)=>{
+app.post('/api/v1/login_affilate',cors(),async(req,res)=>{
     try{
 
         let { email , password , device , time } = req.body;
