@@ -23,9 +23,7 @@ app.use(express.json())
 app.get('/api/v1/users',async(req,res)=>{
   try{
     
-    let data = await user.findAll({
-      attributes:['Name','email','Phone','otp','verified']
-    });
+    let data = await user.findAll();
     if(data){
       await res.json({
         UserData : data
@@ -41,7 +39,11 @@ app.get('/api/v1/users',async(req,res)=>{
 
   }
   catch(err){
-    console.log('res')
+    console.log(err)
+    await res.json({
+      status:"fail",
+      Error:err
+    })
   }
 })
 
