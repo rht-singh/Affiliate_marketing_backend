@@ -24,7 +24,7 @@ app.get('/api/v1/users',async(req,res)=>{
   try{
     
     let data = await user.findAll({
-      attributes:{exclude:['createdAt','updatedAt','device','user_id']}
+      attributes:['Name','email','Phone','otp','verified']
     });
     if(data){
       await res.json({
@@ -296,6 +296,21 @@ app.post('/api/v1/verify',async(req,res)=>{
             Error:err
         })
     }
+})
+
+app.get('/api/v1/delete',async(req,res)=>{
+  let deleted = await user.destroy();
+  if(deleted){
+    await res.json({
+      status:"success",
+      Data:"User data Deleted"
+    })
+  }
+  else{
+    await res.json({
+      status:"oops"
+    })
+  }
 })
 
 app.post("/api/v1/resend", async (req, res) => {
