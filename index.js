@@ -224,12 +224,12 @@ app.post('/api/v1/login_affilate',cors(),async(req,res)=>{
         
         let check = await checkIfUserExist(email)
         if(!check){
-            res.send({status:'fail',msg:'Email address  is not registered'})
+            res.send({status:'fail',Error:'Email address  is not registered'})
         }
         else{
             let verified = checkIfUserVerified(email);
             if(!verified){
-                await res.send({status:'fail',msg:'Email address  is not registered'});
+                await res.send({status:'fail',Error:'Email address  is not registered'});
             }
         else{
 
