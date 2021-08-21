@@ -1,5 +1,5 @@
 const express = require('express');
-const  {sequelize , user , history , why_join}  = require('./models');
+const  {sequelize , user , urls , why_join}  = require('./models');
 const app =express();
 const { checkIfUserExist,checkIfUserVerified  }= require('./utils/validation');
 const { generate } = require('./utils/otp');
@@ -18,8 +18,40 @@ http.createServer(app);
 app.use(cors())
 //
 
+
+
 app.use(express.json())
 
+app.post('/create_url',async(req,res)=>{
+  try{
+
+    let { name ,urls } = req.body;
+    let enter_data = await url.create({
+      name,urls
+    })
+    res.json({
+      status:"success",
+      data:enter_data
+    })
+
+  }
+  catch(err){
+    res.json({
+      Error:err
+    })
+  }
+})
+
+app.get('/get_url',async(req,res)=>{
+
+  let data = await urls.findAll();
+  res.json({
+    status:"success",
+    data
+  })
+
+
+})
 app.get('/api/v1/users',async(req,res)=>{
   try{
     
