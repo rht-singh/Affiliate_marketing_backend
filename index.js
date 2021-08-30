@@ -34,7 +34,7 @@ app.get('/api/otp',async(req,res)=>{
       })
       res.json({
         status:"success",
-        Data
+        data
       })
     }1
 
