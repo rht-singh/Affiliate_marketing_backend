@@ -32,6 +32,10 @@ app.get('/api/otp',async(req,res)=>{
           email
         }
       })
+      res.json({
+        status:"success",
+        Data
+      })
     }1
 
   }
