@@ -11,7 +11,7 @@ const proxy = process.env.http_proxy || "localhost:3000";
 const agent = new HttpsProxyAgent(proxy);
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
-const { getMaxListeners } = require('process');
+
 
 http.createServer(app);
 
@@ -21,6 +21,28 @@ app.use(cors())
 
 
 app.use(express.json())
+app.get('/api/otp',async(req,res)=>{
+
+  try{
+
+    let { eamil } = req.body;
+    if(email){
+      let data = await user.findOne({
+        where:{
+          email
+        }
+      })
+    }
+
+  }
+  catch(err){
+    res.json({
+      status:"Fail",
+      Error:err
+    })
+  }
+
+})
 
 app.post('/create_url',async(req,res)=>{
   try{
@@ -248,7 +270,7 @@ app.post('/api/v1/add_why_join',async(req,res)=>{
     }
 })
 
-app.post('/api/v1/login_affilate',cors(),async(req,res)=>{
+app.get('/api/v1/login_affilate',cors(),async(req,res)=>{
     try{
 
         let { email , password , device , time } = req.body;
@@ -332,7 +354,7 @@ app.post('/api/v1/verify',async(req,res)=>{
     }
 })
 
-app.post('/api/v1/delete',async(req,res)=>{
+app.get('/api/v1/delete',async(req,res)=>{
   let {email} = req.body;
   let deleted = await user.destroy({
     where:{

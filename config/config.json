@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "affilate",
-    "password": "affilate",
-    "database": "affilate_trading",
-    "host": "ec2-18-118-210-250.us-east-2.compute.amazonaws.com",
+    "username": "postgres",
+    "password": "newpassword",
+    "database": "backend",
+    "host": "ec2-3-109-153-61.ap-south-1.compute.amazonaws.com",
     "dialect": "postgres"
   },
   "test": {
