@@ -25,14 +25,14 @@ app.get('/api/otp',async(req,res)=>{
 
   try{
 
-    let { eamil } = req.body;
+    let { email } = req.body;
     if(email){
       let data = await user.findOne({
         where:{
           email
         }
       })
-    }
+    }1
 
   }
   catch(err){
