@@ -285,7 +285,7 @@ app.get('/api/v1/login_affilate',cors(),async(req,res)=>{
             res.send({status:'fail',Error:'Email address  is not registered'})
         }
         else{
-            let verified = checkIfUserVerified(email);
+            let verified = await checkIfUserVerified(email);
             if(!verified){
                 await res.send({status:'fail',Error:'Email address  is not registered'});
             }
