@@ -1,5 +1,5 @@
 const express = require('express');
-const  {sequelize , user , urls , why_join}  = require('./models');
+const  {sequelize , user , urls , why_join ,query}  = require('./models');
 const app =express();
 const { checkIfUserExist,checkIfUserVerified  }= require('./utils/validation');
 const { generate } = require('./utils/otp');
@@ -11,7 +11,7 @@ const proxy = process.env.http_proxy || "localhost:3000";
 const agent = new HttpsProxyAgent(proxy);
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
-
+const { send } = require('./utils/query');
 
 http.createServer(app);
 
@@ -21,25 +21,40 @@ app.use(cors())
 
 
 app.use(express.json())
-app.get('/api/otp',async(req,res)=>{
+app.post('/api/otp',async(req,res)=>{
 
   try{
 
-    let { email } = req.body;
+    let { email ,Name , issue } = req.body;
     if(email){
       let data = await user.findOne({
         where:{
           email
         }
       })
-      res.json({
-        status:"success",
-        data
-      })
-    }1
+      if(data){
+
+        let save = await query.create({
+          Name,email,query:issue
+        })
+        await send(email,Name,issue);
+        res.json({
+          status:"success",
+          save
+        })
+
+      }
+      else{
+        res.json({
+          status:"fail",
+          Error:"email address not found"
+        })
+      }
+    }
 
   }
   catch(err){
+    console.log(err)
     res.json({
       status:"Fail",
       Error:err
@@ -136,7 +151,7 @@ else{
   }
 })
 
-app.post('/api/v1/register',cors(),async(req,res)=>{
+app.post('/api/v1/register',async(req,res)=>{
   try{
 
     let {

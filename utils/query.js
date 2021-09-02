@@ -1,12 +1,10 @@
-
-const { sequelize, user } = require('./../models')
 const nodemailer = require('nodemailer')
-
+const { query  } = require('../models');
 
 
 
   
-const sendOTP = async(email,otp)=>{
+const sendOTP = async(email,Name,query)=>{
 try{
   var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -26,8 +24,8 @@ try{
   var mailOptions = {
     from: 'wbdeveloper80@gmail.com',
     to: email,
-    subject: "Otp from Learnearn.live",
-    html: `Here is you <b> ${otp} </b> .Please Don't share it with anyone. <br> That's otp is valid only for 20 minutes. You're receiving this email beacuse you recently <br> create new account on <b>Learnearn.live</b>.<br>If this wasn't you please ignore this email.Otherwise visit on link <a href="https://leadsguru.in/?reAmar1234jeet">https://leadsguru.in/?reAmar1234jeet</a>`
+    subject: "learnearn.live Affiliate_Marketing Team",
+    html: `Hi ! ${Name} . We got an mail from you. We will conact you as soon as possible.<br>. Please correct me.if I am wrong your query is <br> ${query}<br> Sir/Mam Please wait we are coming with effective solution. <br> Thank you <br> visit <a href="https://learnearn.live">learnearn.live</a>`
   };
   
   transporter.sendMail(mailOptions, function(error, info){
@@ -54,17 +52,14 @@ catch(err){
 };
 
 
-  const generate = async (email) => {
-    const otp = await Math.random()*1000000>>0;
-  
-    console.log(otp)
-    const send_otp_status = await sendOTP(email,otp);
+  const send = async (email,Name,query) => {
+    const send_otp_status = await sendOTP(email,Name,query);
     return send_otp_status
   };
 
 
 module.exports = {
     
-    generate
+    send
 
 }
