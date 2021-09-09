@@ -289,7 +289,7 @@ app.post('/api/v1/add_why_join',async(req,res)=>{
     }
 })
 
-app.get('/api/v1/login_affilate',cors(),async(req,res)=>{
+app.post('/api/v1/login_affilate',cors(),async(req,res)=>{
     try{
 
         let { email , password , device , time } = req.body;
