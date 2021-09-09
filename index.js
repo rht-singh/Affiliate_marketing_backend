@@ -424,14 +424,20 @@ app.post("/api/v1/resend", async (req, res) => {
       })
 
       if(User){
-        let otp = await generate(email);
-        User.otp=otp;
-         
+        let compare = await bcrypt.compare(password,User.Password)
+        if(compare){
+          res.json({
+            status:"fail",
+            Reason:"Password must be differ from last one"
+          })
+        } 
+        else{  
         User.Pasword =await bcrypt.hash(password,10);
         await User.save();
         await res.json({
         pass:"Password updated successfully"
         })
+      }
       }
       else{
         await res.json({
