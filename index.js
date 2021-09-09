@@ -424,7 +424,7 @@ app.post("/api/v1/resend", async (req, res) => {
       })
 
       if(User){
-        let compare = await bcrypt.compare(password,User.Password)
+        let compare = await bcrypt.compare(password,User.Pasword)
         if(compare){
           res.json({
             status:"fail",
