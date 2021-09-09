@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "postgres",
-    "password": "not7that",
-    "database": "affilate_trading",
-    "host": "localhost",
+    "password": "newpassword",
+    "database": "backend",
+    "host": "ec2-3-109-153-61.ap-south-1.compute.amazonaws.com",
     "dialect": "postgres"
   },
   "test": {

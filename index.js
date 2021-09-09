@@ -414,7 +414,9 @@ app.post("/api/v1/resend", async (req, res) => {
     try{
 
       let {email,password} = req.body;
+      if(email && password){
 
+      
       let User = await user.findOne({
         where:{
           email
@@ -437,6 +439,13 @@ app.post("/api/v1/resend", async (req, res) => {
           Reason:"Oops Email address is not found"
         })
       }
+    }
+    else{
+      res.json({
+        status:"fail",
+        Reason:"Please Enter both credentials properly"
+      })
+    }
 
     }
     catch(err){
