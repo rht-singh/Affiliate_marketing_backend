@@ -167,7 +167,7 @@ app.post('/api/v1/register',async(req,res)=>{
     } = req.body;
 
     let verified = "No";
-
+if(email && Phone){
     let exist = await checkIfUserExist(email);
 
     if(exist){
@@ -223,6 +223,8 @@ app.post('/api/v1/register',async(req,res)=>{
          
         })
     }
+  }
+  else return res.send({Error:"Please check your credentials"})
 
   }
   catch(err){
