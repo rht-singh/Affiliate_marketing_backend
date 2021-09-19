@@ -11,6 +11,8 @@ const proxy = process.env.http_proxy || "localhost:3000";
 const agent = new HttpsProxyAgent(proxy);
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
+const helmet = require('helmet');
+const compression = require('compression');
 const { send } = require('./utils/query');
 
 http.createServer(app);
@@ -18,7 +20,8 @@ http.createServer(app);
 app.use(cors())
 //
 
-
+app.use(helmet());
+app.use(compression());
 
 app.use(express.json())
 app.post('/api/otp',async(req,res)=>{
@@ -322,7 +325,8 @@ app.post('/api/v1/login_affilate',cors(),async(req,res)=>{
 
                 res.json({
                   status:"success",
-                  Login:"Login sucessfull"
+                  Login:"Login sucessfull",
+                  Name:User.Name
                 })
 
               }
