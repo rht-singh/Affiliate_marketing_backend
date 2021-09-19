@@ -224,7 +224,7 @@ if(email && Phone){
         })
     }
   }
-  else return res.send({Error:"Please check your credentials"})
+  else return res.send({Error:"Please Enter your credentials"})
 
   }
   catch(err){
