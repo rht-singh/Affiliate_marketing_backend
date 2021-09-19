@@ -184,11 +184,12 @@ app.post('/api/v1/register',async(req,res)=>{
         find.device = device;
         
         await find.save();
+        let data = await user.findOne({where:{email},raw:true});
 
         await res.json({
           status:"success",
           Otp_status:"Success",
-          User:find
+          User:data
         })
       }
       else{
